@@ -1,0 +1,117 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.makinul.ecommerce"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // navigation UI
+    def navigationVersion = '2.3.5'
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    // architecture component (MVVM) lifecycle with live data and view mode
+    def lifecycleVersion = '2.3.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+
+    // Coroutines for background task
+    def coroutinesVersion = "1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    // Coroutine Lifecycle Scopes
+    def coroutineLifeCycleVersion = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$coroutineLifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$coroutineLifeCycleVersion"
+
+    // Activity KTX for viewModels()
+    def activityKTXVersion = "1.3.1"
+    implementation "androidx.activity:activity-ktx:$activityKTXVersion"
+
+    // dependency injection (hilt)
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+
+    def hiltLifecycleVersion = "1.0.0-alpha03"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltLifecycleVersion"
+
+    // network communication with retrofit
+    def retrofitVersion = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    // google json library
+    def gsonVersion = '2.8.6'
+    implementation "com.google.code.gson:gson:$gsonVersion"
+
+    // ok http for retrofit
+    def okhttpLoggingVersion = '4.9.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
+
+    // database with room
+    def roomVersion = "2.3.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor "androidx.room:room-compiler:$roomVersion"
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+//    // To use Kotlin Symbolic Processing (KSP)
+//    ksp("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+//    // optional - RxJava2 support for Room
+//    implementation "androidx.room:room-rxjava2:$roomVersion"
+//    // optional - RxJava3 support for Room
+//    implementation "androidx.room:room-rxjava3:$roomVersion"
+//    // optional - Guava support for Room, including Optional and ListenableFuture
+//    implementation "androidx.room:room-guava:$roomVersion"
+    // optional - Test helpers
+    testImplementation("androidx.room:room-testing:$roomVersion")
+    // optional - Paging 3 Integration
+    implementation("androidx.room:room-paging:2.4.0-alpha04")
+}
