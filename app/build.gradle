@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -10,7 +12,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.makinul.ecommerce"
+        applicationId "com.jolchaya"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -114,4 +116,20 @@ dependencies {
     testImplementation("androidx.room:room-testing:$roomVersion")
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:2.4.0-alpha04")
+
+    // firebase bom to integrate all service
+    implementation platform('com.google.firebase:firebase-bom:28.3.1')
+
+    // analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    // crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    // authentication
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    // realtime database
+    implementation 'com.google.firebase:firebase-database-ktx'
+    /* coroutines support for firebase operations */
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+    // firestore database
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }

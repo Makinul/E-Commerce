@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "411288690750",
+    "firebase_url": "https://jolchaya-a5fc3.firebaseio.com",
+    "project_id": "jolchaya-a5fc3",
+    "storage_bucket": "jolchaya-a5fc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411288690750:android:a72a151f95677edf",
+        "android_client_info": {
+          "package_name": "com.jolchaya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411288690750-f9bvdukrsbecfanl309u9d7idflf6agl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jolchaya",
+            "certificate_hash": "a0fce7de83814e2bc69d537b68f0116ced0b5ee2"
+          }
+        },
+        {
+          "client_id": "411288690750-oiff6sd6d42lt1bkq9fj78nhc3hi7eh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jolchaya",
+            "certificate_hash": "06bd488d2bf380d14d673b71a5b961d5ee2dcbc3"
+          }
+        },
+        {
+          "client_id": "411288690750-dk3pl44vr2us60a0tru6ihvmt8h5l4t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6a_HM0EwnRh9kI9B-5ejgdxNeQ_4Lirw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411288690750-dk3pl44vr2us60a0tru6ihvmt8h5l4t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411288690750:android:e7e593f7eef5cf06",
+        "android_client_info": {
+          "package_name": "com.jolchaya.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "411288690750-irkiplvunffljguq5cvqesgj86c9i4mo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jolchaya.admin",
+            "certificate_hash": "06bd488d2bf380d14d673b71a5b961d5ee2dcbc3"
+          }
+        },
+        {
+          "client_id": "411288690750-dk3pl44vr2us60a0tru6ihvmt8h5l4t4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6a_HM0EwnRh9kI9B-5ejgdxNeQ_4Lirw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "411288690750-dk3pl44vr2us60a0tru6ihvmt8h5l4t4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

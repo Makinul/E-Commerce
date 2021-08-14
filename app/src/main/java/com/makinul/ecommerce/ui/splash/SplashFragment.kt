@@ -44,7 +44,7 @@ class SplashFragment : Fragment() {
         Log.v(TAG, "currentDate: $currentDate")
 
         view.findViewById<Button>(R.id.all_logs).setOnClickListener {
-            val mainIntent = Intent(activity, SettingsActivity::class.java)
+            val mainIntent = Intent(activity, MainActivity::class.java)
             requireActivity().startActivity(mainIntent)
             requireActivity().finish()
         }

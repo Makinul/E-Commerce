@@ -24,6 +24,5 @@ data class Resource<out T>(
         fun <T> loading(data:T?): Resource<T>{
             return Resource(Status.LOADING, data, null)
         }
-
     }
 }
