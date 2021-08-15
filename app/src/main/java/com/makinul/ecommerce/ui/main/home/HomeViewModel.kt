@@ -22,19 +22,19 @@ class HomeViewModel @Inject constructor(
     }
     val text: LiveData<String> = _text
 
-    private val _res = MutableLiveData<Resource<Product>>()
-    val res: LiveData<Resource<Product>>
+    private val _res = MutableLiveData<Resource<List<Product>>>()
+    val res: LiveData<Resource<List<Product>>>
         get() = _res
 
     init {
-//        getAllProducts()
+        getAllProducts()
     }
 
     private fun getAllProducts() {
         viewModelScope.launch {
             _res.postValue(Resource.loading(null))
 
-            productRepository.product("123").let {
+            productRepository.allProducts().let {
 //                if (it.isSuccessful) {
 //                    _res.postValue(Resource.success(it.body()))
 //                } else {

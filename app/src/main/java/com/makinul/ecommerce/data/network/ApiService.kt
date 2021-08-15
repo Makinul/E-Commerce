@@ -24,26 +24,6 @@ interface ApiService {
     @GET("api/breeds/image/random")
     suspend fun getRandom(): Random
 
-//    companion object {
-//        private const val BASE_URL = "https://dog.ceo/"
-//
-//        fun create(): ApiService {
-//            val logger =
-//                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
-//
-//            val client = OkHttpClient.Builder()
-//                .addInterceptor(logger)
-//                .build()
-//
-//            return Retrofit.Builder()
-//                .baseUrl(BASE_URL)
-//                .client(client)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build()
-//                .create(ApiService::class.java)
-//        }
-//    }
-
     @GET("employees")
     suspend fun getEmployees(): Response<EmployeeResponse>
 }
