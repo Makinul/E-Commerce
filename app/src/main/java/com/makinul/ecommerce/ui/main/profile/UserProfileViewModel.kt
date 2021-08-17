@@ -34,9 +34,9 @@ class UserProfileViewModel @Inject constructor(
 //        }
 //    }
 
-    suspend fun getRandom(): LiveData<Random> {
-        return userRepository.getRandom()
-    }
+//    suspend fun getRandom(): LiveData<Random> {
+//        return userRepository.getRandom()
+//    }
 
     fun fetchData() = liveData<Random>(Dispatchers.IO) {
 //        emit()

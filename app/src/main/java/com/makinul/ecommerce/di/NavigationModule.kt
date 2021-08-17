@@ -1,6 +1,6 @@
 package com.makinul.ecommerce.di
 
-import com.example.android.hilt.navigator.AppNavigator
+import com.makinul.ecommerce.navigator.AppNavigator
 import com.makinul.ecommerce.navigator.AppNavigatorImpl
 import dagger.Binds
 import dagger.Module

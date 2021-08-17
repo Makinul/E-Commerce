@@ -17,10 +17,7 @@
 package com.makinul.ecommerce.navigator
 
 import androidx.fragment.app.FragmentActivity
-import com.example.android.hilt.navigator.AppNavigator
-import com.example.android.hilt.navigator.Screens
 import com.makinul.ecommerce.R
-import com.makinul.ecommerce.ui.splash.BrowserFragment
 import com.makinul.ecommerce.ui.splash.SplashFragment
 import javax.inject.Inject
 
@@ -32,7 +29,8 @@ class AppNavigatorImpl @Inject constructor(private val activity: FragmentActivit
     override fun navigateTo(screen: Screens) {
         val fragment = when (screen) {
             Screens.SPLASH -> SplashFragment()
-            Screens.BROWSER -> BrowserFragment()
+//            Screens.BROWSER -> BrowserFragment()
+            else -> SplashFragment()
         }
 
         activity.supportFragmentManager.beginTransaction()

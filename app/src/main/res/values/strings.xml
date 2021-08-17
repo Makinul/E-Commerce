@@ -12,4 +12,7 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_profile">Profile</string>
+    <string name="ok">OK</string>
+    <string name="work_in_progress">Work in progress</string>
+    <string name="app_bg">App background</string>
 </resources>

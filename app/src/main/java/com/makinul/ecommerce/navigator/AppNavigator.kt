@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.hilt.navigator
+package com.makinul.ecommerce.navigator
 
 /**
  * Available screens.

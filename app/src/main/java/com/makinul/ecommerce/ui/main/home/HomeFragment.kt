@@ -26,7 +26,6 @@ import okhttp3.internal.wait
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-
     private lateinit var firebaseDatabase: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
