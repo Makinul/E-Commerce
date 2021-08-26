@@ -21,11 +21,15 @@ class SplashViewModel @Inject constructor(
     val result: LiveData<Resource<AuthResult>>
         get() = _result
 
-    private fun login() {
+    fun login() {
         viewModelScope.launch {
             _result.postValue(Resource.loading(null))
             authRepository.anonymousLogin().let {
-//                if ()
+                if (it == null) {
+                    _result.postValue(Resource.error("no user", null))
+                } else {
+                    _result.postValue(Resource.success(it))
+                }
             }
         }
     }

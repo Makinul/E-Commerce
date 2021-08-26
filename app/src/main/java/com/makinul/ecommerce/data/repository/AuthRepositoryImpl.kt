@@ -11,7 +11,7 @@ class AuthRepositoryImpl @Inject constructor(
 ) : AuthRepository {
     override suspend fun loginWithEmail(email: String, password: String): AuthResult? {
         val data = firebaseAuth
-            .signInAnonymously()
+            .signInWithEmailAndPassword(email, password)
             .await()
         return data
     }
@@ -21,7 +21,10 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override suspend fun anonymousLogin(): AuthResult? {
-        TODO("Not yet implemented")
+        val data = firebaseAuth
+            .signInAnonymously()
+            .await()
+        return data
     }
 
     override suspend fun getFirebaseUser(): FirebaseUser? {

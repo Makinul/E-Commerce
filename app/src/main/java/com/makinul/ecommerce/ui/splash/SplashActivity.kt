@@ -28,11 +28,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-//        if (supportFragmentManager.backStackEntryCount == 0) {
-//            finish()
-//        } else {
-//            super.onBackPressed()
-//        }
         finish()
     }
 }
