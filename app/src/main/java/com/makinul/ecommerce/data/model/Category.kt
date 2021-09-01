@@ -1,7 +1,11 @@
 package com.makinul.ecommerce.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
 data class Category(
-    val id: String? = null,
+    @PrimaryKey val id: String = "",
     val name: String? = null,
     val order: Long = 0,
     val url: String? = null,

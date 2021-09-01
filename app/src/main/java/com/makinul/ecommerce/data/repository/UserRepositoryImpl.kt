@@ -1,10 +1,6 @@
 package com.makinul.ecommerce.data.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.makinul.ecommerce.data.local.UserDao
-import com.makinul.ecommerce.data.model.Random
 import com.makinul.ecommerce.data.model.User
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit

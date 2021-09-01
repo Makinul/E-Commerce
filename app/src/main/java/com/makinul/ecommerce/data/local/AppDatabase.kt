@@ -18,12 +18,14 @@ package com.makinul.ecommerce.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.makinul.ecommerce.data.model.Category
 import com.makinul.ecommerce.data.model.User
 
 /**
  * SQLite Database for storing the logs.
  */
-@Database(entities = arrayOf(User::class), version = 1, exportSchema = false)
+@Database(entities = [User::class, Category::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun categoryDao(): CategoryDao
 }
