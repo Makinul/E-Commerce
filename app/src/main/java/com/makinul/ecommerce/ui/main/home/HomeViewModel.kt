@@ -45,9 +45,9 @@ class HomeViewModel @Inject constructor(
     fun getCategory() {
         viewModelScope.launch {
             _categories.postValue(Resource.loading(null))
-            
+
             productRepository.allCategories().let {
-                Log.v("TAG", "Testing")
+                _categories.postValue(it)
             }
         }
     }

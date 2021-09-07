@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.makinul.ecommerce.BaseFragment
 import com.makinul.ecommerce.databinding.FragmentHomeBinding
+import com.makinul.ecommerce.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,7 +32,17 @@ class HomeFragment : BaseFragment() {
 
         viewModel.getCategory()
         viewModel.categories.observe(viewLifecycleOwner, {
-            showLog()
+            when (it.status) {
+                Status.SUCCESS -> {
+                    showLog()
+                }
+                Status.LOADING -> {
+                    showLog()
+                }
+                Status.ERROR -> {
+                    showLog()
+                }
+            }
         })
     }
 
