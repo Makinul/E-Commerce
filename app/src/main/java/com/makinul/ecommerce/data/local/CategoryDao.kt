@@ -1,20 +1,25 @@
 package com.makinul.ecommerce.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.makinul.ecommerce.data.model.Category
-import com.makinul.ecommerce.data.model.User
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CategoryDao {
     @Insert(onConflict = REPLACE)
-    fun save(category: Category)
+    suspend fun save(category: Category)
+
+    @Insert(onConflict = REPLACE)
+    suspend fun save(categories: List<Category>)
 
     @Query("SELECT * FROM category WHERE id = :categoryId")
-    fun load(categoryId: String): Flow<Category>
+    fun load(categoryId: String): LiveData<Category>
+
+    @Query("SELECT * FROM category")
+    suspend fun getAll(): List<Category>
 
     @Query("SELECT * FROM category WHERE id = :categoryId and hasSubCategory == 'true'")
     fun hasSubcategory(categoryId: String): Boolean

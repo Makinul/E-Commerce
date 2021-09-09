@@ -23,6 +23,7 @@
         app:layout_constraintStart_toEndOf="@+id/categoryRecyclerView" />
 
     <include
+        android:id="@+id/statusLay"
         layout="@layout/status_lay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

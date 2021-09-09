@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.makinul.ecommerce.BaseFragment
+import com.makinul.ecommerce.data.model.Category
 import com.makinul.ecommerce.databinding.FragmentHomeBinding
 import com.makinul.ecommerce.util.Status
 import dagger.hilt.android.AndroidEntryPoint
@@ -13,15 +16,20 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeViewModel by viewModels()
+
+    private var _binding: FragmentHomeBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
         return binding.root
@@ -30,34 +38,58 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCategory()
         viewModel.categories.observe(viewLifecycleOwner, {
             when (it.status) {
+                Status.LOCAL -> {
+                    categories.clear()
+                    it.data?.let { data ->
+                        categories.addAll(data)
+                    }
+                }
                 Status.SUCCESS -> {
-                    showLog()
+                    categories.clear()
+                    it.data?.let { data ->
+                        categories.addAll(data)
+                    }
                 }
                 Status.LOADING -> {
-                    showLog()
+                    binding.statusLay.statusLay.visibility = View.VISIBLE
                 }
                 Status.ERROR -> {
-                    showLog()
+                    showToast(it.message)
                 }
             }
         })
+        if (categories.isEmpty()) {
+            prepareCategories()
+        }
+        prepareCategoryView()
     }
 
-//    private fun asd() {
-//        val job = SupervisorJob() // Create a scope which will keep reference to its child jobs
-//
-//        CoroutineScope(Dispatchers.Main + job).launch {
-//            val response = firebaseDatabase.getReference("products/items").singleValueEvent()
-//
-//            try {
-//                response.wait()
-//            } catch (e: Exception){
-//                e.printStackTrace()
-//            }
-//            Log.v("TAG", "testing")
-//        }
-//    }
+    private fun prepareCategories() {
+        viewModel.getCategories()
+    }
+
+    private lateinit var categoryAdapter: CategoryAdapter
+
+    private fun prepareCategoryView() {
+        categoryAdapter = CategoryAdapter(categories, object : CategoryAdapter.OnClickListener {
+            override fun onItemClick(view: View, position: Int, item: Category) {
+                TODO("Not yet implemented")
+            }
+        })
+        val linearLayoutManager = LinearLayoutManager(requireActivity())
+        val categoryRecyclerView: RecyclerView = binding.categoryRecyclerView
+        categoryRecyclerView.layoutManager = linearLayoutManager
+        categoryRecyclerView.adapter = categoryAdapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    companion object {
+        val categories = ArrayList<Category>()
+    }
 }

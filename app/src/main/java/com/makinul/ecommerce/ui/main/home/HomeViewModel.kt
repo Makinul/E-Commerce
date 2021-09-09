@@ -5,17 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.makinul.ecommerce.data.local.CategoryDao
 import com.makinul.ecommerce.data.model.Category
 import com.makinul.ecommerce.data.model.Product
 import com.makinul.ecommerce.data.repository.ProductRepository
 import com.makinul.ecommerce.util.Resource
+import com.makinul.ecommerce.util.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val categoryDao: CategoryDao
 ) : ViewModel() {
 
     private val _res = MutableLiveData<Resource<List<Product>>>()
@@ -42,12 +45,24 @@ class HomeViewModel @Inject constructor(
     val categories: LiveData<Resource<List<Category>>>
         get() = _categories
 
-    fun getCategory() {
+    fun getCategories() {
         viewModelScope.launch {
             _categories.postValue(Resource.loading(null))
-
+            productRepository.localCategories().let {
+                _categories.postValue(it)
+            }
             productRepository.allCategories().let {
                 _categories.postValue(it)
+//                when (it.status) {
+//                    Status.SUCCESS -> {
+//                        it.data?.let { finalData ->
+//                            categoryDao.save(finalData)
+//                        }
+//                    }
+//                    else -> {
+//
+//                    }
+//                }
             }
         }
     }

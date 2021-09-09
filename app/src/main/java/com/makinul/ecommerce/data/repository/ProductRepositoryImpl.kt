@@ -17,71 +17,46 @@ class ProductRepositoryImpl @Inject constructor(
     private val categoryDao: CategoryDao
 ) : ProductRepository {
 
+    override suspend fun localCategories(): Resource<List<Category>> {
+        return try {
+            val categories = categoryDao.getAll()
+            if (categories.isEmpty()) {
+                Resource.error("no data found", null)
+            } else {
+                Resource.local(categories)
+            }
+        } catch (e: Exception) {
+            Resource.error("error loading from database", null)
+        }
+    }
+
     override suspend fun allCategories(): Resource<List<Category>> {
         val result = database.reference
             .child("products")
             .child("categories")
             .singleValueEvent()
-        try {
-            if (result is DataResponse.Complete) {
-                val snapshot = result.data
+        return try {
+            when (result) {
+                is DataResponse.Complete -> {
+                    val snapshot = result.data
 
-                val categories = ArrayList<Category>()
-                for (postSnapshot in snapshot.children) {
-                    val category = postSnapshot.getValue(Category::class.java)
-                    category?.let { categories.add(it) }
+                    val categories = ArrayList<Category>()
+                    for (postSnapshot in snapshot.children) {
+                        val category = postSnapshot.getValue(Category::class.java)
+                        category?.let {
+                            categories.add(it)
+                            categoryDao.save(it)
+                        }
+                    }
+                    Resource.success(categories)
                 }
-                return Resource.success(categories)
-            } else if (result is DataResponse.Error) {
-                return Resource.error(result.error.message!!, null)
-            } else {
-                return Resource.error("unknown error", null)
+                is DataResponse.Error -> {
+                    Resource.error(result.error.message!!, null)
+                }
             }
         } catch (e: Exception) {
-            return Resource.error(e.message!!, null)
+            Resource.error(e.message!!, null)
         }
-//        when(result) {
-//            is ValueEventResponse.Changed -> {
-//                val snapshot = result.snapshot
-////                ...
-//            }
-//            is ValueEventResponse.Cancelled -> {
-//                val message = result.error.toException().message
-////                Log.e(TAG, "Error: $message")
-//            }
-//            else -> {
-//                result.toString()
-//            }
-//        }
-//        categoryDao.save()
-
-//        val result = database.getReference("ref").singleValueEvent()
-//        when (result) {
-//            is ValueEventResponse.Changed -> {
-//                val snapshot = result.snapshot
-//            }
-//            is ValueEventResponse.Cancelled -> {
-//                val message = result.error.toException().message
-//                Log.e("TAG", "Error: $message")
-//            }
-//            else -> {
-//                Log.e("TAG", "Unknown error")
-//            }
-//        }
-
-//        try {
-//            val result = database.reference
-//                .child("products")
-//                .child("categories")
-//                .awaitsSingle()
-//
-//            if (result != null) {
-//
-//            }
-//        } catch (e: Exception) {
-//
-//        }
-//        return null
     }
 
     interface ValueEventListener {
