@@ -9,6 +9,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.makinul.ecommerce.data.local.AppDatabase
 import com.makinul.ecommerce.data.local.CategoryDao
+import com.makinul.ecommerce.data.local.SubCategoryDao
 import com.makinul.ecommerce.data.local.UserDao
 import dagger.Module
 import dagger.Provides
@@ -39,6 +40,11 @@ object DatabaseModule {
     @Provides
     fun provideCategoryDao(database: AppDatabase): CategoryDao {
         return database.categoryDao()
+    }
+
+    @Provides
+    fun provideSubCategoryDao(database: AppDatabase): SubCategoryDao {
+        return database.subCategoryDao()
     }
 
     @Provides

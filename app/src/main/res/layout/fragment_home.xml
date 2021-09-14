@@ -31,4 +31,11 @@
         app:layout_constraintEnd_toEndOf="@+id/subCategoryRecyclerView"
         app:layout_constraintStart_toStartOf="@+id/subCategoryRecyclerView"
         app:layout_constraintTop_toTopOf="@+id/subCategoryRecyclerView" />
+
+    <ImageView
+        android:id="@+id/testImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

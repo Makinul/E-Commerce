@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.makinul.ecommerce.data.local.CategoryDao
 import com.makinul.ecommerce.data.model.Category
 import com.makinul.ecommerce.data.model.Product
+import com.makinul.ecommerce.data.model.SubCategory
 import com.makinul.ecommerce.data.repository.ProductRepository
 import com.makinul.ecommerce.util.Resource
 import com.makinul.ecommerce.util.Status
@@ -28,14 +29,7 @@ class HomeViewModel @Inject constructor(
     private fun getAllProducts() {
         viewModelScope.launch {
             _res.postValue(Resource.loading(null))
-
             productRepository.allProducts().let {
-//                if (it.isSuccessful) {
-//                    _res.postValue(Resource.success(it.body()))
-//                } else {
-//                    _res.postValue(Resource.error(it.errorBody().toString(), null))
-//                }
-
                 Log.v("TAG", "Testing")
             }
         }
@@ -53,16 +47,19 @@ class HomeViewModel @Inject constructor(
             }
             productRepository.allCategories().let {
                 _categories.postValue(it)
-//                when (it.status) {
-//                    Status.SUCCESS -> {
-//                        it.data?.let { finalData ->
-//                            categoryDao.save(finalData)
-//                        }
-//                    }
-//                    else -> {
-//
-//                    }
-//                }
+            }
+        }
+    }
+
+    private val _subCategories = MutableLiveData<Resource<List<SubCategory>>>()
+    val subCategories: LiveData<Resource<List<SubCategory>>>
+        get() = _subCategories
+
+    fun getSubCategories(categoryId: String) {
+        viewModelScope.launch {
+            _subCategories.postValue(Resource.loading(null))
+            productRepository.getSubCategories(categoryId).let {
+                _subCategories.postValue(it)
             }
         }
     }

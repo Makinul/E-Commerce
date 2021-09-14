@@ -10,17 +10,17 @@ import com.makinul.ecommerce.data.model.Category
 @Dao
 interface CategoryDao {
     @Insert(onConflict = REPLACE)
-    suspend fun save(category: Category)
+    suspend fun save(item: Category)
 
     @Insert(onConflict = REPLACE)
-    suspend fun save(categories: List<Category>)
+    suspend fun save(items: List<Category>)
 
-    @Query("SELECT * FROM category WHERE id = :categoryId")
-    fun load(categoryId: String): LiveData<Category>
+    @Query("SELECT * FROM category WHERE id = :id")
+    fun load(id: String): LiveData<Category>
 
     @Query("SELECT * FROM category")
     suspend fun getAll(): List<Category>
 
-    @Query("SELECT * FROM category WHERE id = :categoryId and hasSubCategory == 'true'")
-    fun hasSubcategory(categoryId: String): Boolean
+    @Query("SELECT * FROM category WHERE id = :id and hasSubCategory == 'true'")
+    fun hasSubcategory(id: String): Boolean
 }

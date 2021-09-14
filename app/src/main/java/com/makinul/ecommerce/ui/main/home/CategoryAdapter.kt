@@ -53,6 +53,7 @@ class CategoryAdapter(
         }
 
         fun bindData(item: Category) {
+//            binding.icon
 //            binding.date.text = booking.fromDateTime
 //            val destination = booking.startingFrom + ", " + booking.via + ", " + booking.destination
 //            binding.destination.text = destination
